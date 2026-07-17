@@ -1,0 +1,179 @@
+{
+  "assets": {
+    "equity": {
+      "annualized_geometric_return": {
+        "historical": 0.08589846639326042,
+        "simulated_path_distribution": {
+          "median": 0.08165294707678117,
+          "q05": 0.03392233464520482,
+          "q95": 0.1255461768544506
+        },
+        "simulated_pooled": 0.08046833929398309
+      },
+      "annualized_monthly_log_volatility": {
+        "historical": 0.16813064514609155,
+        "simulated_pooled": 0.1699016306287843
+      },
+      "maximum_drawdown": {
+        "historical_full_219_months": 0.5170359272779267,
+        "simulated_first_219_months": {
+          "median": 0.4177728578465865,
+          "q05": 0.23952488170464845,
+          "q95": 0.6701108636403293
+        },
+        "simulated_full_600_months": {
+          "median": 0.5401755991159332,
+          "q05": 0.36100541929076047,
+          "q95": 0.7609507665573055
+        }
+      },
+      "monthly_simple_return_quantiles": {
+        "historical": {
+          "q01": -0.12102681176386595,
+          "q05": -0.08071664677577531,
+          "q50": 0.013378387909111082,
+          "q95": 0.08391404361593092,
+          "q99": 0.11173124247105416
+        },
+        "simulated_pooled": {
+          "q01": -0.12260912105085028,
+          "q05": -0.08106915046634688,
+          "q50": 0.01292092052956172,
+          "q95": 0.08886911925851358,
+          "q99": 0.11324140660906817
+        }
+      }
+    },
+    "muni_bond": {
+      "annualized_geometric_return": {
+        "historical": 0.032049675035347294,
+        "simulated_path_distribution": {
+          "median": 0.03238770022476241,
+          "q05": 0.01989785964421651,
+          "q95": 0.04475570087053158
+        },
+        "simulated_pooled": 0.03235694089009375
+      },
+      "annualized_monthly_log_volatility": {
+        "historical": 0.050576424517837504,
+        "simulated_pooled": 0.05175953603589569
+      },
+      "maximum_drawdown": {
+        "historical_full_219_months": 0.11601132901768696,
+        "simulated_first_219_months": {
+          "median": 0.10935554357350014,
+          "q05": 0.06726679459526151,
+          "q95": 0.1942194993000175
+        },
+        "simulated_full_600_months": {
+          "median": 0.14445937163826705,
+          "q05": 0.09686221476746752,
+          "q95": 0.23287568548446447
+        }
+      },
+      "monthly_simple_return_quantiles": {
+        "historical": {
+          "q01": -0.030399479018254297,
+          "q05": -0.02520592528724416,
+          "q50": 0.0032507881074710257,
+          "q95": 0.02467671284602865,
+          "q99": 0.04650221568491813
+        },
+        "simulated_pooled": {
+          "q01": -0.030529610566205078,
+          "q05": -0.02552621140289688,
+          "q50": 0.003413136506296615,
+          "q95": 0.025007465825918434,
+          "q99": 0.04844450813945907
+        }
+      }
+    },
+    "taxable_bond": {
+      "annualized_geometric_return": {
+        "historical": 0.04134893320500573,
+        "simulated_path_distribution": {
+          "median": 0.04136107357310396,
+          "q05": 0.020301004252917344,
+          "q95": 0.06184179364203293
+        },
+        "simulated_pooled": 0.041074770376502784
+      },
+      "annualized_monthly_log_volatility": {
+        "historical": 0.08346373115532235,
+        "simulated_pooled": 0.08473476681589533
+      },
+      "maximum_drawdown": {
+        "historical_full_219_months": 0.23264984264624677,
+        "simulated_first_219_months": {
+          "median": 0.197213278097231,
+          "q05": 0.11188976975684989,
+          "q95": 0.3527631575295946
+        },
+        "simulated_full_600_months": {
+          "median": 0.26139142702912993,
+          "q05": 0.16864310025676055,
+          "q95": 0.41734300070524405
+        }
+      },
+      "monthly_simple_return_quantiles": {
+        "historical": {
+          "q01": -0.0625209917254509,
+          "q05": -0.03245484035198807,
+          "q50": 0.0044517655810260345,
+          "q95": 0.03753715346560819,
+          "q99": 0.06379868134403682
+        },
+        "simulated_pooled": {
+          "q01": -0.06311864110737564,
+          "q05": -0.03267538766660203,
+          "q50": 0.004451765581026003,
+          "q95": 0.03771544650139021,
+          "q99": 0.06647683107027633
+        }
+      }
+    }
+  },
+  "correlation": {
+    "historical": {
+      "equity__muni_bond": 0.3311488516984374,
+      "equity__taxable_bond": 0.5188523858121601,
+      "muni_bond__taxable_bond": 0.7280592449421082
+    },
+    "simulated_pooled": {
+      "equity__muni_bond": 0.33492744430352844,
+      "equity__taxable_bond": 0.5183890892927734,
+      "muni_bond__taxable_bond": 0.7327078010177906
+    }
+  },
+  "decision": null,
+  "limitations": [
+    "One finite 219-month historical ETF record is the only control.",
+    "Five thousand paths reuse historical months with replacement.",
+    "The paths are conditional on one fitted K4 model.",
+    "The HMM approximates cross-month dependence; it is not a causal macro model.",
+    "Full 600-month drawdowns are not directly comparable with 219-month history."
+  ],
+  "provenance": {
+    "manifest_sha256": "ce3edc2494151d1007e33919cc61ea6acc5afc29887c61965b45bfcced23339c",
+    "model_fingerprint": "be5df93d382a499dbf21c00b1e0be9d47bfda08bd387d0ac70b36d47ba88d6c7",
+    "processed_data_fingerprint": "e2caa7756ec5f6b37806e6ef58e44fe827f741ed544e82b132a0cd2f1bbe1760",
+    "run_fingerprint": "101600b117d07921aee8589f25da8dcff0f2ab80c0c6db7e692040a929283705"
+  },
+  "release_gate": false,
+  "schema_id": "prpg-v5-historical-simulated-comparison-v1",
+  "scope": {
+    "historical_first_month": "2008-04",
+    "historical_last_month": "2026-06",
+    "historical_monthly_observations": 219,
+    "monthly_csv_files": 100,
+    "simulated_monthly_observations": 3000000,
+    "simulated_months_per_path": 600,
+    "simulated_paths": 5000
+  },
+  "status": "descriptive_report_only",
+  "tickers": {
+    "equity": "ACWI",
+    "muni_bond": "MUB",
+    "taxable_bond": "LQD"
+  }
+}
