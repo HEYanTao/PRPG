@@ -1,0 +1,82 @@
+schema_version: 2
+run:
+  name: calendar-month-v5
+  master_seed: 20260716
+  artifact_root: ../artifacts/v5
+  output_root: ../runs/v5
+  seed_registry: v5-seed-registry.yaml
+data:
+  cutoff: 2026-06-30
+  calendar: XNYS
+  assets:
+    equity: ACWI
+    taxable_bond: LQD
+    muni_bond: MUB
+  common_history_only: true
+  complete_months_only: true
+  forbid_imputation: true
+  yfinance:
+    start: 2007-01-01
+    end_exclusive: 2026-07-01
+    interval: 1d
+    auto_adjust: false
+    actions: true
+    repair: false
+    keepna: true
+    prepost: false
+    threads: false
+    timeout_seconds: 30
+    timezone: America/New_York
+    max_rounds: 3
+    library_retries_per_round: 2
+    ticker_wall_clock_seconds: 600
+    http_429_min_cooldown_seconds: 60
+  quality_flags:
+    equity_abs_simple_return: 0.20
+    bond_abs_simple_return: 0.10
+    adjustment_factor_move: 0.05
+model:
+  scientific_version: 16
+  feature_order: [equity, taxable_bond, muni_bond]
+  states: 4
+  covariance_type: diag
+  deterministic_restarts: 50
+  variance_floor: 1.0e-6
+  start_probability_prior: 1.0
+  transition_probability_prior: 1.5
+  means_prior: 0.0
+  means_weight: 0.0
+  covariance_prior: 0.0
+  covariance_weight: 0.0
+  maximum_iterations: 1000
+  tolerance: 1.0e-6
+  standard_deviation_ddof: 0
+  initial_state: stationary
+  minimum_state_months: 10
+  ranking: greatest_finite_training_log_likelihood
+  canonical_state_order: lexicographic_standardized_centroid
+  probability_tolerance: 1.0e-12
+  stationary_residual_tolerance: 1.0e-12
+simulation:
+  paths: 5000
+  horizon_months: 600
+  split:
+    training: 4000
+    validation: 500
+    test: 500
+  output_frequencies: [daily, monthly, quarterly, annual]
+  rl_decision_frequency: quarterly
+  return_representation: log_total_decimal
+  paths_per_shard: 50
+execution:
+  workers: 9
+  native_threads_per_worker: 1
+validation:
+  volatility_ratio_minimum: 0.90
+  volatility_ratio_maximum: 1.10
+  correlation_error_maximum_exclusive: 0.05
+  covariance_relative_error_maximum: 0.15
+  occupancy_absolute_floor: 0.005
+  transition_cell_absolute_floor: 0.01
+  csv_log_sum_absolute_tolerance: 1.0e-12
+  aggregate_branch_coverage_minimum_percent: 80.0

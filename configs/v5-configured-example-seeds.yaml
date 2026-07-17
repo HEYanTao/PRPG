@@ -1,0 +1,24 @@
+# The model-fit namespace matches the delivered K4 artifact. A different
+# generation seed is supplied with `prpg v5 generate --path-seed ...` and is
+# recorded in that run's manifest without changing these calibration seeds.
+schema_version: 1
+rng_contract_version: 1
+master_seed: 20260716
+scientific_version: 16
+hmm_fit:
+  domain: model_fit
+  family: not_applicable
+  stage: hmm_library_seed
+  scope: production_main_and_folds
+  replicate: 0
+  states: 4
+  restart_first: 0
+  restart_last: 49
+path_generation:
+  domain: production
+  family: not_applicable
+  entity: one_based_path_id
+  stages: [state_chain, source_rank_uniforms]
+  training_path_ids: [1, 8]
+  validation_path_ids: [9, 10]
+  test_path_ids: [11, 12]

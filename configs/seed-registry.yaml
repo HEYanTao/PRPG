@@ -1,0 +1,84 @@
+schema_version: 1
+contract_version: 1
+master_seed: 20260714
+scientific_versions:
+  historical_vector_v1: 1
+  kernel_mean_neutral_lambda_0_25_v1: 2
+  kernel_mean_neutral_lambda_0_50_v1: 3
+  kernel_mean_neutral_lambda_0_75_v1: 4
+  kernel_mean_neutral_lambda_1_00_v1: 5
+  historical_vector_v2: 6
+  kernel_mean_neutral_lambda_0_25_v2: 7
+  kernel_mean_neutral_lambda_0_50_v2: 8
+  kernel_mean_neutral_lambda_0_75_v2: 9
+  kernel_mean_neutral_lambda_1_00_v2: 10
+  historical_vector_v3: 11
+  kernel_mean_neutral_lambda_0_25_v3: 12
+  kernel_mean_neutral_lambda_0_50_v3: 13
+  kernel_mean_neutral_lambda_0_75_v3: 14
+  kernel_mean_neutral_lambda_1_00_v3: 15
+domains:
+  model_fit: 1
+  block_alpha_calibration: 2
+  threshold_calibration: 3
+  development: 4
+  qualification: 5
+  production: 6
+  release_validation: 7
+families:
+  not_applicable: 0
+  low_frequency: 1
+  high_frequency: 2
+stages:
+  hmm_library_seed: 1
+  state_chain: 2
+  restart_uniforms: 3
+  source_rank_uniforms: 4
+  optional_residual_noise: 5
+  reference_resampling: 6
+  validation_sampling_or_strategy: 7
+model_fit_scopes:
+  design_main: 0
+  design_macro_stability: 1
+  design_rolling_fold: 2
+  design_parametric_adequacy: 3
+  production_main_and_folds: 4
+  production_macro_stability: 5
+  production_parametric_adequacy: 6
+  bridge_model_selection_prefix: 7
+  bridge_model_selection_full: 8
+  bridge_nonparametric_selection_prefix: 9
+  bridge_nonparametric_selection_full: 10
+  bridge_model_fixed_k_prefix: 11
+  bridge_model_fixed_k_full: 12
+  bridge_nonparametric_fixed_k_prefix: 13
+  bridge_nonparametric_fixed_k_full: 14
+  hmm_identification_meta: 15
+calibration_purposes:
+  macro_bootstrap: 0
+  rolling_score_bootstrap: 1
+  latent_ppc: 2
+  parametric_adequacy: 3
+  conditioned_block: 4
+  ideal_block_streamless: 5
+  dependence_audit_streamless: 6
+  kernel_estimation: 7
+  kernel_verification_streamless: 8
+  bridge_history: 9
+  g5_outer_null: 10
+  g5_qualification_streamless: 11
+  meta_type_i: 12
+  meta_power: 13
+  sobol_or_strategy: 14
+  reserved_no_stream: 15
+calibration_artifacts:
+  design_or_control: 0
+  production_or_candidate: 1
+  bridge_model: 2
+  bridge_nonparametric: 3
+closed_registry:
+  model_entity_layout: scope4_replicate16_k4_restart8
+  calibration_entity_layout: purpose4_artifact2_variant6_replicate20
+  maximum_hmm_restart: 49
+  forbidden_calibration_variant_range_inclusive: [25, 63]
+  purpose_15_has_stream: false

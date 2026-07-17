@@ -1,0 +1,123 @@
+schema_version: 1
+run:
+  name: canonical-prpg
+  master_seed: 20260714
+  output_root: runs
+data:
+  snapshot_mode: immutable
+  artifact_root: artifacts
+  cutoff: 2026-06-30
+  macro_vintage_policy: current_vintage_retrospective
+  assets:
+    equity: ACWI
+    muni_bond: MUB
+    taxable_bond: AGG
+  macro:
+    industrial_production: INDPRO
+    inflation: CPIAUCSL
+    yield_curve_spread: T10Y3M
+    credit_spread: BAA10Y
+  common_history_only: true
+  forbid_price_forward_fill: true
+  yfinance:
+    start: 2007-01-01
+    end_exclusive: 2026-07-01
+    interval: 1d
+    auto_adjust: false
+    actions: true
+    repair: false
+    keepna: true
+    prepost: false
+    threads: false
+    timeout_seconds: 30
+    timezone: America/New_York
+    max_rounds: 3
+    library_retries_per_round: 2
+    ticker_wall_clock_seconds: 600
+    http_429_min_cooldown_seconds: 60
+  fred:
+    transport: official_csv
+    max_attempts: 5
+    backoff_caps_seconds: [2, 5, 15, 45]
+    daily_month_coverage_fraction: 0.80
+  quality:
+    equity_abs_simple_return_flag: 0.20
+    bond_abs_simple_return_flag: 0.10
+    adjustment_factor_move_flag: 0.05
+    minimum_common_monthly_vectors: 180
+    minimum_common_daily_vectors: 3500
+model:
+  regime_candidates: [2, 3, 4, 5]
+  regime_selection_policy: owner_fixed_k4_v3
+  fixed_regime_count: 4
+  covariance_type: tied
+  deterministic_restarts: 50
+  alpha_policy_candidates: [historical_vector, kernel_mean_neutral]
+  selected_alpha_policy: null
+  selected_neutral_lambda: null
+  neutral_lambda_grid: [0.25, 0.50, 0.75, 1.00]
+  initial_state: stationary
+  design_holdout_months: 24
+  production_refit: full_data_mandatory
+bootstrap:
+  monthly:
+    block_selector: politis_white_multivariate
+  daily:
+    block_selector: politis_white_multivariate
+simulation:
+  calendar: SC252-52-v1
+  scientific_version: 11
+  low_frequency:
+    paths: 5000
+    years: 50
+    base_frequency: monthly
+  high_frequency:
+    paths: 1000
+    years: 50
+    base_frequency: daily
+export:
+  format: csv
+  return_representation: log_total_decimal
+  low_paths_per_shard: 100
+  high_paths_per_shard: 50
+execution:
+  workers: auto
+  reserve_physical_cores: 1
+  memory_fraction_limit: 0.70
+  log_level: INFO
+validation:
+  profile: release
+  directional_alpha_margin: 0.10
+  familywise_alpha: 0.05
+  tost_confidence: 0.90
+  csv_log_sum_abs_tolerance: 1.0e-12
+  simple_return_identity_abs_tolerance: 1.0e-10
+  kernel_mean_calibration:
+    prefix_window_counts: [10000, 20000, 40000, 80000, 160000, 320000]
+    annualized_simultaneous_half_width_max: 0.0010
+    confidence: 0.95
+    cluster_unit: window
+    multiplicity: bonferroni_all_cells_and_six_looks
+  raw_distortion:
+    comparison_rule: smaller_of_raw_vs_raw_95pct_critical_and_practical_cap
+    mean_shift_over_raw_volatility: 0.05
+    absolute_annualized_mean_shift: 0.0100
+    relative_volatility_change: 0.05
+    w1_over_raw_sigma: 0.10
+    eligible_quantile_shift_over_raw_sigma: 0.15
+    normalized_covariance_frobenius_distance: 0.10
+    maximum_absolute_pairwise_correlation_change: 0.05
+    standardized_sliced_wasserstein_distance: 0.10
+    standardized_energy_distance: 0.10
+    eligible_tail_downside_coexceedance_probability_change: 0.02
+    taxable_minus_muni_mean_shift_over_spread_volatility: 0.05
+    taxable_minus_muni_absolute_annualized_mean_shift: 0.0050
+    spread_relative_volatility_change: 0.05
+    spread_w1_over_spread_sigma: 0.10
+    eligible_spread_quantile_shift_over_spread_sigma: 0.15
+    daily_quantiles: [0.01, 0.05, 0.50, 0.95, 0.99]
+    monthly_quantiles: [0.10, 0.50, 0.90]
+  volatility_timing:
+    gap_definition: simulated_improvement_minus_historical_control_improvement
+    simultaneous_familywise_one_sided_confidence: 0.95
+    annualized_sharpe_upper_bound_exclusive: 0.20
