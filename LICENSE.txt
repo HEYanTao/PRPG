@@ -1,0 +1,18 @@
+PRPG PRIVATE RESEARCH LICENSE NOTICE
+
+Copyright (c) 2026 PRPG project owner. All rights reserved.
+
+The PRPG application, documentation, model artifacts, historical provider data,
+and generated return paths in this delivery are provided for the project owner's
+private local research and internal development use. No right to publish,
+redistribute, sublicense, sell, or externally host the provider data, derived
+data, model artifacts, or generated paths is granted by this notice.
+
+Third-party Python packages and vendored source retain their respective licenses.
+In particular, see the license and source records under
+`src/prpg/vendor/patton_politis_white/` and the metadata bundled with installed
+dependencies. Market-data provider terms may impose additional restrictions.
+
+THE MATERIAL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. It is a
+research simulator, not investment advice, a forecast, or a guarantee of future
+performance.

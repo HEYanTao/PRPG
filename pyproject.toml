@@ -1,0 +1,94 @@
+[build-system]
+requires = ["setuptools==83.0.0", "wheel==0.47.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prpg"
+version = "0.1.0"
+description = "Auditable plausible-return path generator for equity, municipal-bond, and taxable-bond proxies"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = { text = "Proprietary - private local research use only" }
+authors = [{ name = "PRPG maintainers" }]
+dependencies = [
+  "exchange-calendars==4.13.2",
+  "hmmlearn==0.3.3",
+  "httpx==0.28.1",
+  "numpy==2.3.5",
+  "pandas==2.3.3",
+  "pandas-datareader==0.11.1",
+  "psutil==7.1.0",
+  "pydantic==2.12.4",
+  "PyYAML==6.0.3",
+  "requests==2.32.5",
+  "scikit-learn==1.7.2",
+  "scipy==1.16.3",
+  "threadpoolctl==3.6.0",
+  "typer==0.20.0",
+  "yfinance==1.5.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "coverage==7.15.0",
+  "hypothesis==6.156.4",
+  "mypy==1.17.1",
+  "pytest==8.4.2",
+  "pytest-cov==7.0.0",
+  "ruff==0.12.0",
+]
+
+[project.scripts]
+prpg = "prpg.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"prpg.vendor.patton_politis_white" = ["LICENSE", "SOURCE.json", "*.txt"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-config --strict-markers -ra"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["prpg"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+skip_covered = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["B", "C4", "E", "F", "I", "N", "RUF", "SIM", "UP"]
+ignore = ["N818"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["prpg"]
+warn_unreachable = true
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = [
+  "exchange_calendars.*",
+  "psutil",
+  "yaml",
+  "yfinance",
+  "hmmlearn.*",
+  "scipy.*",
+  "sklearn.*",
+  "pandas.*",
+  "pandas_datareader.*",
+]
+ignore_missing_imports = true
